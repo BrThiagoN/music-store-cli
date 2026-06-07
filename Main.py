@@ -15,25 +15,35 @@ def menu():
 
     if value == 1:
         cadastrarInstrumento()
-    if value == 2:
+    elif value == 2:
         listarInstrumentos()
-    if value == 3:
+    elif value == 3:
         sair()
     else:
         respostaInvalida()
 
-def cadastrarInstrumento() -> array:
-     name = input('qual o nome do instrumento?')
-     price = float(input('qual o preço do instrumento?'))
-     instrument = {'name': name, 'price': price}
+def cadastrarInstrumento() -> list[dict]:
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('==========CADASTRAR INSTRUMENTO==========')
+    try:
+        name = str(input('qual o nome do instrumento? '))
+        price = float(input('qual o preço do instrumento? '))
+        instrument = {'Name': name, 'Price': price}
+        data.instruments.append(instrument)
+        print('instrumento adicionado com sucesso!')
+        retornarMenu()
 
-     data.instruments.append(instrument)
-     print('instrumento adicionado com sucesso!')
-     retornarMenu()
-     return data.instruments
+    except ValueError:
+        print('Valor inválido, tente novamente!')
+        return cadastrarInstrumento()
+    return data.instruments
 
 def listarInstrumentos() -> None:
-    print(data.instruments)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('==========MENU==========')
+    for instrument in data.instruments:
+        print(f'Nome: {instrument["Name"]}, Preço: R${instrument["Price"]:.2f}')
+    print('========================')
     retornarMenu()
 
 def sair() -> None:
