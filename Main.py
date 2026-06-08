@@ -1,7 +1,6 @@
 import os
-import array
 
-import data
+import data 
 
 def menu():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -53,13 +52,15 @@ def excluirInstrumento() -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     exibirInstrumento()
     delete:str = input('Qual o nome do item você deseja excluir? ')
+    encontrado = False
     for instrument in data.instruments:
         if instrument['Name'].lower() == delete.lower():
             data.instruments.remove(instrument)
             print('Instrumento removido com sucesso')
-        else:
-            print('instrumento não encontrado')
-        retornarMenu()
+            encontrado = True
+    if encontrado == False:
+        print('instrumento não encontrado')
+    retornarMenu()
 
 #FORA DO FLUXO DE MENU
 def exibirInstrumento() -> None:
